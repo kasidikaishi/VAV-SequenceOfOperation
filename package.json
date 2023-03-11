@@ -1,0 +1,19 @@
+{
+  "name": "vav-sequenceofoperation",
+  "version": "1.0.0",
+  "description": "Variable Air Volume(VAV) is an air conditioning system that automaticlly adjusts the air supply based on indoor demand changes. It can regulate the indoor temperature by adjusting the air supply volume.",
+  "main": "VAV-TemperatureChanged.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kasidikaishi/VAV-SequenceOfOperation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kasidikaishi/VAV-SequenceOfOperation/issues"
+  },
+  "homepage": "https://github.com/kasidikaishi/VAV-SequenceOfOperation#readme"
+}
