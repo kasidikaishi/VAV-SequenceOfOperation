@@ -5,8 +5,7 @@ function temperatureChange() {
   let changeTContent = document.getElementById('temperature-change');
   let changeTButton = document.getElementById('temperature-change-submit');
   let damper = document.querySelector('.damper-container');
-  let damperPausedAngle = null;
-
+  let currentRotationAngle = 0;
   let intervalID = setInterval(() => change(), 1000)
 
   changeTButton.addEventListener('click', () => {
@@ -20,14 +19,7 @@ function temperatureChange() {
 
   var pauseRotate = function() {
     damper.style.animationPlayState = 'paused';
-    let computedStyle = window.getComputedStyle(damper);
-    let transform = computedStyle.getPropertyValue('transform');
-    let values = transform.split('(')[1].split(')')[0].split(',');
-    let a = values[0];
-    let b = values[1];
-    damperPausedAngle = Math.round(Math.atan2(b, a) * (180/Math.PI));
-    // damper.style.transform = `rotate(${damperPausedAngle}deg)`;
-    console.log('---->paused angle is', damperPausedAngle, damper.style.transform);
+    console.log('------------>', currentRotationAngle)
   }
 
   var toggleRotation = function(condition, direction) {
@@ -38,22 +30,18 @@ function temperatureChange() {
       let a = values[0];
       let b = values[1];
       let damperAngle = Math.round(Math.atan2(b, a) * (180/Math.PI));
-      damperPausedAngle = damperAngle;
-      console.log('......', direction, damperAngle)
       if (direction === 'clockwise') {
         damper.style.animationDirection = 'normal';
-        if (damperAngle === 90) {
-          pauseRotate();
-        } else {
-          damper.style.animationPlayState = 'running';
-        }
+        currentRotationAngle = damperAngle + 3;
       } else if (direction === 'counterclockwise') {
         damper.style.animationDirection = 'reverse';
-        if (damperAngle === 0) {
-          pauseRotate();
-        } else {
-          damper.style.animationPlayState = 'running';
-        }
+        currentRotationAngle = damperAngle - 3;
+      }
+      if (currentRotationAngle >= 1 && currentRotationAngle <= 89) {
+        damper.style.animationPlayState = 'running';
+        damper.style.transform = `rotate(${currentRotationAngle}deg)`;
+      } else {
+        pauseRotate();
       }
     } else {
       pauseRotate();
@@ -71,14 +59,14 @@ function temperatureChange() {
   let currentSA = Number(currentSAContent.textContent);
 
   var increaseSA = function() {
-    currentSA = currentSA + 10;
+    currentSA = Math.min(currentSA + 10, 800);
     currentT = currentT - 1;
     currentSAContent.innerText = currentSA;
     currentTContent.innerText = `${currentT} F`;
   }
 
   var decreaseSA = function() {
-    currentSA = currentSA - 10;
+    currentSA = Math.max(currentSA - 10, 200);
     currentT = currentT + 1;
     currentSAContent.innerText = currentSA;
     currentTContent.innerText = `${currentT} F`;

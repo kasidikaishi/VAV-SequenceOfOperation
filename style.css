@@ -114,16 +114,8 @@ body {
   width: 10px;
   height: 195px;
   background-color: darkgrey;
+  transform: rotate(45deg);
   animation: rotate 20s linear infinite paused;
-}
-
-@keyframes rotate {
-  /* from { transform: rotate(0deg); }
-  to { transform: rotate(90deg); } */
-  0% { transform: rotate(45deg); }
-  25% { transform: rotate(90deg); }
-  75% { transform: rotate(0deg); }
-  100% { transform: rotate(45deg); }
 }
 
 #current-temperature-number,
