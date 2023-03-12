@@ -4,13 +4,13 @@ function temperatureChange() {
   let setupTContent = document.getElementById('temperature-setup-number');
   let changeTContent = document.getElementById('temperature-change');
   let changeTButton = document.getElementById('temperature-change-submit');
-  let Ts;
+  let Ts = setupTContent.textContent;
 
   let intervalID = setInterval(() => change(), 1000)
 
   changeTButton.addEventListener('click', () => {
     const value = changeTContent.value;
-    setupTContent.innerText = `${value} F`;
+    setupTContent.innerText = value;
     Ts = value;
     changeTContent.value = '';
     clearInterval(intervalID);
@@ -35,15 +35,13 @@ function temperatureChange() {
   }
 
   var change = function() {
-    if (Ts) {
-      if (currentT > Ts) {
-        increaseSA();
-      } else if (currentT < Ts) {
-        decreaseSA();
-      } else {
-        clearInterval(intervalID);
-        console.log(`current T is ${currentT}, equal to Ts ${Ts}, current SA is ${currentSA}`)
-      }
+    if (currentT > Ts) {
+      increaseSA();
+    } else if (currentT < Ts) {
+      decreaseSA();
+    } else {
+      clearInterval(intervalID);
+      console.log(`current T is ${currentT}, equal to Ts ${Ts}, current SA is ${currentSA}`)
     }
   }
 
