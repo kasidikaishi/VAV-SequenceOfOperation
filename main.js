@@ -6,6 +6,7 @@ function temperatureChange() {
   let changeTButton = document.getElementById('temperature-change-submit');
   let damper = document.querySelector('.damper-container');
   let currentRotationAngle = 0;
+
   let intervalID = setInterval(() => change(), 1000)
 
   changeTButton.addEventListener('click', () => {
@@ -60,31 +61,32 @@ function temperatureChange() {
 
   var increaseSA = function() {
     currentSA = Math.min(currentSA + 10, 800);
-    currentT = currentT - 1;
+    currentT = currentT - 0.1;
     currentSAContent.innerText = currentSA;
-    currentTContent.innerText = `${currentT} F`;
+    currentTContent.innerText = `${currentT.toFixed(1)} F`;
+
   }
 
   var decreaseSA = function() {
     currentSA = Math.max(currentSA - 10, 200);
-    currentT = currentT + 1;
+    currentT = currentT + 0.1;
     currentSAContent.innerText = currentSA;
-    currentTContent.innerText = `${currentT} F`;
+    currentTContent.innerText = `${currentT.toFixed(1)} F`;
   }
 
   var change = function() {
-    if (currentT > Ts) {
+    if (Math.abs(currentT - Ts) < (1e-10)) {
+      clearInterval(intervalID);
+      toggleRotation(false)
+      console.log(`space T ${currentT.toFixed(1)} = Ts ${Ts}, current Airflow setpoint is ${currentSA}`)
+    } else if (currentT > Ts) {
       increaseSA();
       toggleRotation(true, 'clockwise');
-      console.log(`space T is ${currentT}, Airflow setpoint is increasing+++ ${currentSA}`);
+      console.log(`space T is ${currentT.toFixed(1)}, Airflow setpoint is increasing+++ ${currentSA}`);
     } else if (currentT < Ts) {
       decreaseSA();
       toggleRotation(true, 'counterclockwise');
-      console.log(`space T is ${currentT}, Airflow setpoint is decreasing--- ${currentSA}`)
-    } else {
-      clearInterval(intervalID);
-      toggleRotation(false)
-      console.log(`space T ${currentT} = Ts ${Ts}, current Airflow setpoint is ${currentSA}`)
+      console.log(`space T is ${currentT.toFixed(1)}, Airflow setpoint is decreasing--- ${currentSA}`)
     }
   }
 

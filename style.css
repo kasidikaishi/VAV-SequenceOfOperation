@@ -14,6 +14,7 @@ body {
   max-width: 2050px;
 
   font-family: Arial, sans-serif;
+  font-size: larger;
   background-color: #ccd5ae;
 }
 
@@ -24,6 +25,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.vav-controller {
+  margin-top: 25px;
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
 }
 
 .container-left {
