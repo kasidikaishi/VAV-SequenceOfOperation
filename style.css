@@ -70,6 +70,21 @@ body {
   align-items: center;
 }
 
+.controller-container {
+  position: absolute;
+  margin-top: 100px;
+  margin-left: 0px;
+}
+#supply-air {
+  position: absolute;
+  margin-top: 100px;
+  margin-left: 0px;
+  width: 200px;
+  height: 80px;
+  background-color: aliceblue;
+  border: 2px solid black
+}
+
 #current-temperature-number,
 #temperature-setup-number {
   font-size: 40px;
