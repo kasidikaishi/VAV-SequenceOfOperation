@@ -35,12 +35,48 @@ body {
 }
 
 .container-right {
-  margin-top: 25px;
-  margin-left: 5px;
-  display: flex;
-  flex-direction: column;
+  position: absolute;
+  width: 300px;
+  height: 508px;
+  margin-top: 200px;
+  margin-left: 100px;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  background-color: #F2DB63;
+}
+
+.current-temperature {
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.temperature-setup {
+  position: absolute;
+  margin-top: 120px;
+  margin-left: 20px;
+}
+
+.temperature-change-container {
+  position: absolute;
+  margin-top: 250px;
+  margin-left: 20px;
+}
+
+.airflowSetpoint {
+  margin-top: 100px;
   align-items: center;
-  justify-content: center;
+}
+
+#current-temperature-number,
+#temperature-setup-number {
+  font-size: 40px;
+}
+
+#airflowSetpoint-number {
+  font-size: 50px;
 }
 
 #temperature-setpoint-submit {
@@ -52,3 +88,5 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+
