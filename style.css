@@ -10,7 +10,8 @@ body {
   display: flex;
   width: 100%;
   height: 100vh;
-  min-width: 650px;
+  min-width: 850px;
+  max-width: 2050px;
 
   font-family: Arial, sans-serif;
   background-color: #ccd5ae;
@@ -32,6 +33,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: absolute;
 }
 
 .container-right {
@@ -40,10 +42,6 @@ body {
   height: 508px;
   margin-top: 200px;
   margin-left: 100px;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-  /* justify-content: center; */
   background-color: #F2DB63;
 }
 
@@ -75,14 +73,57 @@ body {
   margin-top: 100px;
   margin-left: 0px;
 }
+
 #supply-air {
   position: absolute;
-  margin-top: 100px;
-  margin-left: 0px;
-  width: 200px;
-  height: 80px;
-  background-color: aliceblue;
-  border: 2px solid black
+  margin-top: 230px;
+  margin-left: -400px;
+  width: 300px;
+  height: 120px;
+  background-color: #D9D9D9;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+#damper-section {
+  position: absolute;
+  margin-top: 190px;
+  margin-left: -120px;
+  width: 430px;
+  height: 200px;
+  background-color: #D9D9D9;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+#downstream-air {
+  position: absolute;
+  margin-top: 230px;
+  margin-left: 310px;
+  width: 360px;
+  height: 120px;
+  background-color: #D9D9D9;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.damper-container {
+  position: absolute;
+  margin-top: 193px;
+  margin-left: 50px;
+  width: 10px;
+  height: 195px;
+  background-color: darkgrey;
+  animation: rotate 20s linear infinite paused;
+}
+
+@keyframes rotate {
+  /* from { transform: rotate(0deg); }
+  to { transform: rotate(90deg); } */
+  0% { transform: rotate(45deg); }
+  25% { transform: rotate(90deg); }
+  75% { transform: rotate(0deg); }
+  100% { transform: rotate(45deg); }
 }
 
 #current-temperature-number,

@@ -4,6 +4,8 @@ function temperatureChange() {
   let setupTContent = document.getElementById('temperature-setup-number');
   let changeTContent = document.getElementById('temperature-change');
   let changeTButton = document.getElementById('temperature-change-submit');
+  let damper = document.querySelector('.damper-container');
+  let damperPausedAngle = null;
 
   let intervalID = setInterval(() => change(), 1000)
 
@@ -15,6 +17,48 @@ function temperatureChange() {
     clearInterval(intervalID);
     intervalID = setInterval(() => change(), 1000);
   })
+
+  var pauseRotate = function() {
+    damper.style.animationPlayState = 'paused';
+    let computedStyle = window.getComputedStyle(damper);
+    let transform = computedStyle.getPropertyValue('transform');
+    let values = transform.split('(')[1].split(')')[0].split(',');
+    let a = values[0];
+    let b = values[1];
+    damperPausedAngle = Math.round(Math.atan2(b, a) * (180/Math.PI));
+    // damper.style.transform = `rotate(${damperPausedAngle}deg)`;
+    console.log('---->paused angle is', damperPausedAngle, damper.style.transform);
+  }
+
+  var toggleRotation = function(condition, direction) {
+    if (condition) {
+      let computedStyle = window.getComputedStyle(damper);
+      let transform = computedStyle.getPropertyValue('transform');
+      let values = transform.split('(')[1].split(')')[0].split(',');
+      let a = values[0];
+      let b = values[1];
+      let damperAngle = Math.round(Math.atan2(b, a) * (180/Math.PI));
+      damperPausedAngle = damperAngle;
+      console.log('......', direction, damperAngle)
+      if (direction === 'clockwise') {
+        damper.style.animationDirection = 'normal';
+        if (damperAngle === 90) {
+          pauseRotate();
+        } else {
+          damper.style.animationPlayState = 'running';
+        }
+      } else if (direction === 'counterclockwise') {
+        damper.style.animationDirection = 'reverse';
+        if (damperAngle === 0) {
+          pauseRotate();
+        } else {
+          damper.style.animationPlayState = 'running';
+        }
+      }
+    } else {
+      pauseRotate();
+    }
+  }
 
   var getNumberContent = function(content) {
     const n = content.length;
@@ -43,12 +87,15 @@ function temperatureChange() {
   var change = function() {
     if (currentT > Ts) {
       increaseSA();
+      toggleRotation(true, 'clockwise');
       console.log(`space T is ${currentT}, Airflow setpoint is increasing+++ ${currentSA}`);
     } else if (currentT < Ts) {
       decreaseSA();
+      toggleRotation(true, 'counterclockwise');
       console.log(`space T is ${currentT}, Airflow setpoint is decreasing--- ${currentSA}`)
     } else {
       clearInterval(intervalID);
+      toggleRotation(false)
       console.log(`space T ${currentT} = Ts ${Ts}, current Airflow setpoint is ${currentSA}`)
     }
   }
