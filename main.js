@@ -34,6 +34,8 @@ function temperatureChange() {
     normalModeButton.style.backgroundColor = '';
     if (cooldownMode) {
       cooldownModeButton.style.backgroundColor = 'darkgrey';
+      reheatCoilOpen = false;
+      reheatCoil.style.backgroundColor = 'blue';
     } else {
       cooldownModeButton.style.backgroundColor = '';
     }
@@ -68,6 +70,8 @@ function temperatureChange() {
     warmupModeButton.style.backgroundColor = '';
     if (normalMode) {
       normalModeButton.style.backgroundColor = 'darkgrey';
+      reheatCoilOpen = false;
+      reheatCoil.style.backgroundColor = 'blue';
     } else {
       normalModeButton.style.backgroundColor = '';
     }
