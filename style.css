@@ -34,6 +34,7 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
+  font-weight: bolder;
 }
 
 .container-left {
@@ -138,34 +139,14 @@ body {
   left: 0%;
 }
 
-.arrow-right {
-  display: inline-block;
-  position: relative;
-  top: 280px;
-  left: -130px;
-  width: 20px;
-  height: 20px;
-  background-color: transparent;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid black;
-}
-
-.arrow-right::before {
-  content: "";
+.use-case-container {
   position: absolute;
-  top: 50%;
-  left: -10px;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid black;
+  margin-top: 520px;
+  margin-left: 20px;
 }
 
 .button-container {
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;

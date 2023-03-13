@@ -22,8 +22,6 @@
           <div class="damper-container">
             <div id="damper-shaft"></div>
           </div>
-          <!-- <div class="supply-air-text">supply air</div> -->
-          <!-- <div class="arrow-right"></div> -->
         </div>
         <div class="button-container">
           <button type="submit" class="button" id="cooldown-mode" name="cooldown-mode">cooldown</button>
@@ -32,13 +30,23 @@
         </div>
         <div id="reheat-coil"></div>
       </div>
+      <div class="use-case-container">
+        use case:
+        <ol class="use-case">
+          <li>T needs to be increased to maintain Ts.</li>
+          <li>The airflow setpoint is at its minimum.</li>
+          <li>T needs to be decreased to maintain Ts.</li>
+          <li>The airflow setpoint is at its maximum.</li>
+          <li>The VAV operates differently when the Air Handling Unit is in different modes.</li>
+        </ol>
+      </div>
       <div class="column">
         <div class="container-right">
           <div class="temperatura-top">
-            <div class="current-temperature">Space Temperature:
+            <div class="current-temperature">Space Temperature(T):
               <div id="current-temperature-number">70<span> F</span></div>
             </div>
-            <div class="temperature-setup">Temperature Setpoint:
+            <div class="temperature-setup">Temperature Setpoint(Ts):
               <div id="temperature-setup-number">70<span> F</span></div>
             </div>
             <div class="temperature-change-container">
