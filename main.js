@@ -5,7 +5,7 @@ function temperatureChange() {
   let changeTContent = document.getElementById('temperature-change');
   let changeTButton = document.getElementById('temperature-change-submit');
   let damper = document.querySelector('.damper-container');
-  let currentRotationAngle = 0;
+  let damperAngle = 0;
 
   let intervalID = setInterval(() => change(), 1000)
 
@@ -17,37 +17,6 @@ function temperatureChange() {
     clearInterval(intervalID);
     intervalID = setInterval(() => change(), 1000);
   })
-
-  var pauseRotate = function() {
-    damper.style.animationPlayState = 'paused';
-    console.log('------------>', currentRotationAngle)
-  }
-
-  var toggleRotation = function(condition, direction) {
-    if (condition) {
-      let computedStyle = window.getComputedStyle(damper);
-      let transform = computedStyle.getPropertyValue('transform');
-      let values = transform.split('(')[1].split(')')[0].split(',');
-      let a = values[0];
-      let b = values[1];
-      let damperAngle = Math.round(Math.atan2(b, a) * (180/Math.PI));
-      if (direction === 'clockwise') {
-        damper.style.animationDirection = 'normal';
-        currentRotationAngle = damperAngle + 3;
-      } else if (direction === 'counterclockwise') {
-        damper.style.animationDirection = 'reverse';
-        currentRotationAngle = damperAngle - 3;
-      }
-      if (currentRotationAngle >= 1 && currentRotationAngle <= 89) {
-        damper.style.animationPlayState = 'running';
-        damper.style.transform = `rotate(${currentRotationAngle}deg)`;
-      } else {
-        pauseRotate();
-      }
-    } else {
-      pauseRotate();
-    }
-  }
 
   var getNumberContent = function(content) {
     const n = content.length;
@@ -61,6 +30,8 @@ function temperatureChange() {
 
   var increaseSA = function() {
     currentSA = Math.min(currentSA + 10, 800);
+    damperAngle = currentSA * 0.1 + 10;
+    damper.style.transform = `rotate(${damperAngle}deg)`;
     currentT = currentT - 0.1;
     currentSAContent.innerText = currentSA;
     currentTContent.innerText = `${currentT.toFixed(1)} F`;
@@ -69,6 +40,8 @@ function temperatureChange() {
 
   var decreaseSA = function() {
     currentSA = Math.max(currentSA - 10, 200);
+    damperAngle = currentSA * 0.1 + 10;
+    damper.style.transform = `rotate(${damperAngle}deg)`;
     currentT = currentT + 0.1;
     currentSAContent.innerText = currentSA;
     currentTContent.innerText = `${currentT.toFixed(1)} F`;
@@ -77,19 +50,15 @@ function temperatureChange() {
   var change = function() {
     if (Math.abs(currentT - Ts) < (1e-10)) {
       clearInterval(intervalID);
-      toggleRotation(false)
       console.log(`space T ${currentT.toFixed(1)} = Ts ${Ts}, current Airflow setpoint is ${currentSA}`)
     } else if (currentT > Ts) {
       increaseSA();
-      toggleRotation(true, 'clockwise');
       console.log(`space T is ${currentT.toFixed(1)}, Airflow setpoint is increasing+++ ${currentSA}`);
     } else if (currentT < Ts) {
       decreaseSA();
-      toggleRotation(true, 'counterclockwise');
       console.log(`space T is ${currentT.toFixed(1)}, Airflow setpoint is decreasing--- ${currentSA}`)
     }
   }
-
 }
 
 temperatureChange();

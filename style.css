@@ -124,8 +124,18 @@ body {
   width: 10px;
   height: 195px;
   background-color: darkgrey;
-  transform: rotate(45deg);
+  transform: rotate(50deg);
   animation: rotate 20s linear infinite paused;
+}
+
+#damper-shaft {
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 46%;
+  left: 0%;
 }
 
 #current-temperature-number,
